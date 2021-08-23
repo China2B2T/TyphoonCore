@@ -4,11 +4,12 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
-	"github.com/TyphoonMC/go.uuid"
-	"github.com/seebs/nbt"
 	"io"
 	"math"
 	"strings"
+
+	uuid "github.com/TyphoonMC/go.uuid"
+	"github.com/seebs/nbt"
 )
 
 type ConnReadWrite struct {
@@ -244,10 +245,13 @@ func (player *Player) ReadStringLimited(max int) (s string, err error) {
 	if err != nil {
 		return "", err
 	}
-	if length > max {
-		player.Kick("Invalid packet")
-		return "", nil
-	}
+
+	// Don't care about this.
+	// if length > max {
+	// 	player.Kick("Invalid packet")
+	// 	return "", nil
+	// }
+
 	buffer := make([]byte, length)
 	_, err = io.ReadFull(player.io.rdr, buffer)
 	if err != nil {
@@ -265,10 +269,13 @@ func (player *Player) ReadNStringLimited(max int) (s string, read int, err error
 	if err != nil {
 		return "", read, err
 	}
-	if length > max {
-		player.Kick("Invalid packet")
-		return "", read, nil
-	}
+
+	// Don't care about this.
+	// if length > max {
+	// 	player.Kick("Invalid packet")
+	// 	return "", read, nil
+	// }
+
 	buffer := make([]byte, length)
 	_, err = io.ReadFull(player.io.rdr, buffer)
 	if err != nil {
